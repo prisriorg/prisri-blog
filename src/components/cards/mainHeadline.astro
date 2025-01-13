@@ -16,7 +16,6 @@ const { article, isLast, isFirst } = Astro.props;
 const { remarkPluginFrontmatter } = await render(article);
 const category = categoriesHandler.oneCategory(article.data.category.id);
 ---
-
 <article class="group">
   <a
     href={`/articles/${article.id}`}

@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "./Layout.astro";
+import ViewListHeader from "../components/base/view-list-header.astro";
+import type { ArticleMeta, Meta } from "../types";
+
+type Props = {
+  header: string;
+  entry: CollectionEntry<"views">;
+};
+
+const { entry, header } = Astro.props;
+---
+
+<BaseLayout entry={entry}>
+  <div
+    class="container flex flex-col h-full pb-8 pt-4"
+    data-pagefind-ignore="all"
+  >
+    <ViewListHeader title={header} />
+    <slot />
+  </div>
+</BaseLayout>

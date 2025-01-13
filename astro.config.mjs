@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 
 import tailwind from "@astrojs/tailwind";
 import { SITE } from "./src/config";
-
+import pagefind from "astro-pagefind";
 import sitemap from "@astrojs/sitemap";
 
 import mdx from "@astrojs/mdx";
@@ -15,8 +15,12 @@ export default defineConfig({
   integrations: [
     tailwind(),
     mdx(),
+    pagefind(),
     sitemap({
       changefreq: "hourly",
     }),
   ],
+  experimental: {
+    responsiveImages: true,
+  },
 });
