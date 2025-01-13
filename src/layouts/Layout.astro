@@ -3,18 +3,22 @@ import "../assets/css/globals.css";
 import Footer from "../components/base/Footer.astro";
 import Head from "../components/base/Head.astro";
 import Header from "../components/base/Header.astro";
+import { SITE } from "../config";
+import type { Meta } from "../types";
+const metaa:Meta = {
+  title: SITE.title,
+  metaTitle: SITE.title,
+  description: SITE.description,
+  ogImage: "/og-image.jpg",
+  ogImageAlt: SITE.title,
+  type: "website",
+}
 ---
 
 <!doctype html>
 <html lang="en">
   <Head
-    meta={{
-      title: "Astro News",
-      metaTitle: "Astro News",
-      description: "The latest news from the stars",
-      type: "website",
-      ogImage: "/og-image.png",
-    }}
+    meta={metaa}
   />
   <body>
     <Header />

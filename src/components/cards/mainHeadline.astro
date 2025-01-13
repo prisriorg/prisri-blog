@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+// import Divider from "~/components/bases/divider.astro";
+import { render } from "astro:content";
+// import { getDateDistance } from "~/lib/utils/date";
+// import { categoriesHandler } from "~/lib/handlers/categories";
+
+type Props = {
+  article: CollectionEntry<"articles">;
+  isFirst?: boolean;
+  isLast?: boolean;
+};
+const { article, isLast, isFirst } = Astro.props;
+
+const { remarkPluginFrontmatter } = await render(article);
+// const category = categoriesHandler.oneCategory(article.data.category.id);
+---
+
+<article
+  class:list={[
+    "group py-2",
+    isFirst ? "pt-0" : "pt-2",
+    isLast ? "border-b-0 pb-0" : "border-b",
+  ]}
+>
+  <a href={`/articles/${article.id}`} class="flex items-stretch gap-2 group">
+    <div class="flex flex-col flex-1">
+      <div class="flex items-center gap-2 mb-1">
+        <div class="flex-1">
+          <h2 class="text-base lg:group-hover:underline">
+            {article.data.title}
+          </h2>
+          <p
+            class="text-sm text-base-content/80 text-balance md:line-clamp-2 lg:line-clamp-3"
+          >
+            {article.data.description}
+          </p>
+        </div>
+      </div>
+      <div
+        class="flex items-center text-xs text-base-content/80 mt-1 lg:mt-auto"
+      >
+        <!-- <span class="text-primary">{category.data.title}</span> -->
+        <!-- <Divider />
+        <span>{getDateDistance(remarkPluginFrontmatter.lastModified)}</span> -->
+      </div>
+    </div>
+
+    <div class="overflow-hidden w-[165px] h-[125px] shrink-0">
+      <Image
+        src={article.data.cover}
+        alt={article.data.covert_alt
+          ? article.data.covert_alt
+          : article.data.title}
+        loading="eager"
+        class="object-cover rounded w-full h-full"
+        width={165}
+        height={125}
+      />
+    </div>
+  </a>
+</article>
