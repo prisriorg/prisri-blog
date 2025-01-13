@@ -1,8 +1,8 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwind from '@astrojs/tailwind';
-import { SITE } from './src/config';
+import tailwind from "@astrojs/tailwind";
+import { SITE } from "./src/config";
 
 import sitemap from "@astrojs/sitemap";
 
@@ -12,5 +12,11 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   site: SITE.url,
   base: SITE.basePath,
-  integrations: [tailwind(), mdx(), sitemap()]
+  integrations: [
+    tailwind(),
+    mdx(),
+    sitemap({
+      changefreq: "hourly",
+    }),
+  ],
 });
