@@ -4,7 +4,7 @@ export const SITE = {
   title: "PriSri Blog",
   description: "Welcome to PriSri Blog, where you can read about the latest news and articles on technology, programming, lifestyle, productivity, health, and finance.",
   author: "Mohammad Rahmani",
-  url: "https://www.prisri.org",
+  url: "https://prisri.org",
   github: "https://github.com/Mrahmani71/astro-news",
   locale: "en-US",
   dir: "ltr",
@@ -66,11 +66,11 @@ export const OTHER_LINKS: Link[] = [
     text: "Cookie Policy",
   },
   {
-    href: "https://astro-news-six.vercel.app/rss.xml",
+    href: "/rss.xml",
     text: "RSS",
   },
   {
-    href: "https://astro-news-six.vercel.app/sitemap-index.xml",
+    href: "/sitemap-index.xml",
     text: "Sitemap",
   },
 ];
