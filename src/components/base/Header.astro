@@ -1,0 +1,85 @@
+---
+import Search01 from "../../assets/svgs/search-01.astro";
+import NavbarItem from "./navbar-items.astro";
+import { NAVIGATION_LINKS, OTHER_LINKS, SITE } from "../../config";
+import ThemeController from "./theme-controller.astro";
+import Menu from "../../assets/svgs/menu.astro";
+---
+
+<header>
+<div class="navbar bg-base-100 border-b">
+  <div class="navbar-start lg:w-1/2">
+    <div class=" md:hidden dropdown">
+      <button
+        tabindex="0"
+        role="button"
+        class="btn btn-ghost btn-circle"
+        aria-label="Menu"
+      >
+        <Menu />
+      </button>
+    
+      <ul
+        tabindex="0"
+        class="menu dropdown-content z-50 bg-base-100 rounded-box w-56 shadow"
+      >
+        <li><a href="/" aria-label="Homepage">Home</a></li>
+        <li><a href="/articles" aria-label="Articles Page">Articles</a></li>
+    
+        <li>
+          <details>
+            <summary>Categories</summary>
+            <ul>
+              {
+                NAVIGATION_LINKS.map(({ href, text, target }) => (
+                  <li>
+                    <a href={href} target={target ?? "_self"} aria-label={text}>
+                      {text}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+        </li>
+    
+        <li>
+          <details>
+            <summary>Other Pages</summary>
+            <ul>
+              {
+                OTHER_LINKS.map(({ href, text, target }) => (
+                  <li>
+                    <a href={href} target={target ?? "_self"} aria-label={text}>
+                      {text}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </div>
+    
+    <a class="text-xl px-2 text-nowrap lg:hidden" href="/">{SITE.title}</a>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <a class="text-xl px-2" href="/">{SITE.title}</a>
+  </div>
+  <div class="navbar-end">
+    <ThemeController />
+    <a class="btn btn-ghost" href="/search" aria-label="Search">
+      <Search01 />
+    </a>
+  </div>
+</div>
+
+  <nav class="navbar-center hidden lg:flex container">
+    <ul class="menu menu-sm menu-horizontal px-1 mx-auto">
+      <NavbarItem item={{ href: "/", text: "Home" }} />
+      <NavbarItem item={{ href: "/articles", text: "Articles" }} />
+      {NAVIGATION_LINKS.map((item) => <NavbarItem item={item} />)}
+    </ul>
+  </nav>
+</header>

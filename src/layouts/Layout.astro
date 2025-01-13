@@ -1,22 +1,24 @@
+---
+import "../assets/css/globals.css";
+import Footer from "../components/base/Footer.astro";
+import Head from "../components/base/Head.astro";
+import Header from "../components/base/Header.astro";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <Head
+    meta={{
+      title: "Astro News",
+      metaTitle: "Astro News",
+      description: "The latest news from the stars",
+      type: "website",
+      ogImage: "/og-image.png",
+    }}
+  />
+  <body>
+    <Header />
+    <slot />
+    <Footer/>
+  </body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

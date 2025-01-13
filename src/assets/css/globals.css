@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: "Source Sans Pro";
+    --font-serif: "Source Serif 4 Variable";
+
+    cursor: default;
+  }
+  html {
+    @apply h-full text-[16px];
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      @apply text-[17px];
+    }
+  }
+
+  body {
+    @apply font-sans antialiased h-full;
+  }
+
+  h1,
+  h2 {
+    @apply font-serif;
+  }
+
+  small,
+  time {
+    @apply text-sm;
+  }
+
+  .prose {
+    pre {
+      code {
+        span,
+        p {
+          word-break: break-all;
+        }
+      }
+    }
+  }
+}
+
+@layer components {
+  .a-01 {
+    @apply hover:underline decoration-primary;
+  }
+}
