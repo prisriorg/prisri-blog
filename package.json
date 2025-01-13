@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "engines": {
-    "node": ">= 18.19"
+    "node": "20.9.0"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
