@@ -1,0 +1,95 @@
+---
+import { SITE } from "../../config";
+
+const graph = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "@id": "#table-of-contents",
+    name: "Home",
+    url: SITE.url,
+  },
+];
+
+const data = {
+  "@context": "https://schema.org",
+  "@graph": graph.map((item) => {
+    return item;
+  }),
+};
+---
+
+<script
+  id="schema-0"
+  type="application/ld+json"
+  set:html={JSON.stringify(data)}
+/>
+
+
+<script id="schema-2" type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "keywords": "Ashwini Vaishnaw, Meta CEO, Mark Zuckerberg, Lok Sabha poll results, Union Minister",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.dnaindia.com/india/report-union-minister-ashwini-vaishnaw-fact-checks-meta-ceo-mark-zuckerberg-on-lok-sabha-poll-results-3126864"
+    },
+    "headline": "Union Minister Vaishnaw fact-checks Meta CEO Mark Zuckerberg on Lok Sabha poll results, says, 'People of",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://cdn.dnaindia.com/sites/default/files/styles/half/public/2025/01/13/2671364-vaishnaw.jpg",
+      "height": "720",
+      "width": "1280"
+    },
+    "datePublished": "2025-01-13T22:56:38+05:30",
+    "dateModified": "2025-01-13T22:56:35+05:30",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Prashant Tamta",
+        "url": "https://www.dnaindia.com/authors/prashant-tamta"
+      }
+    ],
+    "publisher": {
+      "@type": "NewsMediaOrganization",
+      "name": "DNA India",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cdn.dnaindia.com/sites/all/themes/dnaindia/logo.png",
+        "width": "600",
+        "height": "60"
+      }
+    },
+    "description": "Vaishnaw opted for Meta's Facebook platform to call out Zuckerberg for spreading 'misinformation'.",
+    "articleBody": "Union minister Ashwini Vaishnaw hit back at Facebook founder Mark Zuckerberg on Monday for making a &quot;factually incorrect&quot; statement that the incumbent government in India lost the election in 2024 due to its handling of the COVID-19 pandemic. Zuckerberg, chairman and CEO of Meta Platforms, triggered a row by claiming in a podcast interview that the Indian government lost the election in 2024 due to its weak COVID-19 response. Vaishnaw opted for Meta&#39;s Facebook platform to call out Zuckerberg for spreading &quot;misinformation&quot;. &quot;It is disappointing to see misinformation from Mr Zuckerberg himself. Let&#39;s uphold facts and credibility,&quot; the Union information and broadcasting minister said, tagging Meta on X and other social media platforms. &quot;From free food for 800 million, 2.2 billion free vaccines, and aid to nations worldwide during COVID, to leading India as the fastest-growing major economy, PM Modi&#39;s decisive 3rd-term victory is a testament to good governance and public trust,&quot; he said. &quot;Mr Zuckerberg&#39;s claim that most incumbent governments, including India in the 2024 elections, lost post-COVID is factually incorrect,&quot; the minister said. READ |&nbsp;NTA postpones UGC-NET exam scheduled for January 15 due to... Appearing on the Joe Rogan podcast, Zuckerberg said 2024 was the big election year around the world and in a lot of countries like India, the incumbents lost the polls. &quot;There is some sort of global phenomena, whether it was inflation because of the economic policies to deal with Covid or just how the governments dealt with Covid, seems to have this effect that is global, not just the US, but like a very broad decrease in trust, at least in the set incumbents and maybe, in sort of these democratic institutions overall,&quot; the Facebook founder said. (Except for the headline, this story has not been edited by DNA staff and is published from PTI)"
+  }
+</script>
+
+<script id="schema-4" type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsMediaOrganization",
+      "name": "dnaindia.com",
+      "legalName": "Zee Media Corporation Ltd",
+      "url": "https://www.dnaindia.com",
+      "logo": "https://cdn.dnaindia.com/sites/all/themes/dnaindia/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Essel Studio FC-19 Film City",
+        "addressLocality": "Sector 16A",
+        "addressRegion": "Noida",
+        "postalCode": "201301",
+        "addressCountry": "India"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "telephone": "[+91-0120-2511064]",
+        "email": "inews@zeemedia.esselgroup.com"
+      },
+      "sameAs": ["https://www.facebook.com/dnaindia", "https://twitter.com/dna"]
+    }
+  ]
+</script>

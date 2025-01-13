@@ -1,0 +1,28 @@
+---
+type WebPageSchemaProps = {
+  name: string;
+  description: string;
+  keywords: string;
+  url: string;
+}[];
+const {main} = Astro.props;
+if (!main) {
+  throw new Error("No main data provided");
+}
+const data = main as WebPageSchemaProps;
+const schema = data.map((item) => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: item.name,
+    description: item.description,
+    keywords: item.keywords,
+    url: item.url,
+  };
+});
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

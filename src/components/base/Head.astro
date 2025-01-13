@@ -51,8 +51,11 @@ const OGImage = new URL(meta.ogImage, Astro.url).href;
     <meta property="twitter:description" content={meta.description} />
     <meta property="twitter:image" content={OGImage} />
     <meta property="twitter:image:alt" content={meta.ogImageAlt} />
-    
-  
+
+    {meta.keywords ? (
+      <meta name="keywords" content={meta.keywords.join(", ")} />
+    ) : null}
+
     <!-- {
       isArticleMeta(meta) ? (
         <>

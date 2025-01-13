@@ -1,0 +1,42 @@
+---
+import { SITE } from "../../config";
+
+const { meta } = Astro.props;
+
+const data = {
+  title: meta.metaTitle,
+  description: meta.description,
+  image: meta.ogImage,
+  datePublished: meta.datePublished,
+  dateModified: meta.dateModified,
+};
+
+const schema = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": new URL(Astro.url.pathname, Astro.site).href,
+      },
+      "headline": data.title,
+      "description": data.description,
+      "image": data.image,
+      "author": {
+        "@type": "Person",
+        "name": SITE.author,
+        "url": SITE.authorUrl
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": SITE.organization,
+        "logo": {
+          "@type": "ImageObject",
+          "url": new URL("logo.svg", Astro.site).href,
+        }
+      },
+      "datePublished": data.datePublished,
+      "dateModified": data.dateModified,
+    };
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)}> 
+</script>

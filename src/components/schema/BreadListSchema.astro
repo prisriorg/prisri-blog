@@ -1,0 +1,25 @@
+---
+const { data } = Astro.props;
+if (!data) {
+  throw new Error("No data provided");
+}
+const dtstr = data as { name: string; url: string }[];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: dtstr.map((element, index) => {
+    return {
+      "@type": "ListItem",
+      position: index + 1,
+      name: element.name,
+      item: element.url,
+    };
+  }),
+};
+---
+<script
+  id="schema-1"
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

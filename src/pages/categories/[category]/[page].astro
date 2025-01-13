@@ -1,0 +1,66 @@
+---
+import type { GetStaticPaths } from "astro";
+import { SITE } from "../../../config";
+import { articlesHandler } from "../../../handlers/articles";
+import { categoriesHandler } from "../../../handlers/categories";
+import ListLayout from "../../../layouts/list.astro";
+
+import PaginationOne from "../../../components/base/pagination-one.astro";
+import WideCard from "../../../components/cards/wideCard.astro";
+import { getMeta } from "../../..//utils/getMeta";
+import { getEntry } from "astro:content";
+export const getStaticPaths = (async ({ paginate }) => {
+  const allCategories = categoriesHandler.allCategories();
+  const allArticles = articlesHandler.allArticles();
+
+  return allCategories.flatMap((category) => {
+    const filteredArticles = allArticles.filter(
+      (article) => article.data.category.id === category.id
+    );
+    return paginate(filteredArticles, {
+      params: { category: category.id },
+      pageSize: SITE.postsPerPage,
+    });
+  });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const params = Astro.params;
+const articles = page.data;
+const pathname = new URL(Astro.request.url).pathname.split("/");
+const firstPath = pathname[1];
+
+const entry = await getEntry("views", "categories");
+
+if (!entry) {
+  return Astro.redirect("/404");
+}
+---
+
+<ListLayout header={params.category} entry={entry}>
+  <ul class="flex flex-col gap-2 flex-1">
+    {
+      articles.map((article) => (
+        <li>
+          <WideCard
+            article={article}
+            isLast={articles.lastIndexOf(article) === articles.length - 1}
+          />
+        </li>
+      ))
+    }
+  </ul>
+  {
+    articles.length > SITE.postsPerPage ? (
+      <PaginationOne
+        length={page.lastPage}
+        currentUrl={page.url.current}
+        currentPage={page.currentPage}
+        firstUrl={`/${firstPath}`}
+        prevUrl={page.url.prev}
+        nextUrl={page.url.next}
+        lastUrl={`/${firstPath}/${page.lastPage}`}
+      />
+    ) : null
+  }
+</ListLayout>
