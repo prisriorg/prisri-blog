@@ -3,7 +3,7 @@ import type { Link } from "../types";
 export const SITE = {
   title: "PriSri Blog",
   description: "Welcome to PriSri Blog, where you can read about the latest news and articles on technology, programming, lifestyle, productivity, health, and finance.",
-  author: "Mohammad Rahmani",
+  author: "Priyansh Srivastava",
   url: "https://prisri.org",
   github: "https://github.com/Mrahmani71/astro-news",
   locale: "en-US",
