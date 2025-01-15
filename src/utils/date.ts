@@ -1,9 +1,9 @@
 import { formatDistanceToNow, parseISO, format } from "date-fns";
 
 export const getDateDistance = (date: string) =>
-  formatDistanceToNow(parseISO(date || new Date().toISOString()), {
+  formatDistanceToNow(parseISO(date), {
     addSuffix: true,
-  });
+  }).replace("about", "");
 
 export const formatDate = (
   date: string,

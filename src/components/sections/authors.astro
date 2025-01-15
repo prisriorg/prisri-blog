@@ -1,0 +1,16 @@
+---
+import AuthorCard from "../cards/authorCard.astro";
+import HeaderSection from "./headerSection.astro";
+import { authorsHandler } from "../../handlers/authors";
+
+const authors = authorsHandler.limitAurhors(6);
+---
+
+<section class="container py-12" data-pagefind-ignore="all">
+  <HeaderSection title="Authors" link_title="View all" link_url="/authors" />
+  <ul
+    class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-4 mt-4 list-none"
+  >
+    {authors.map((author) => <AuthorCard author={author} />)}
+  </ul>
+</section>

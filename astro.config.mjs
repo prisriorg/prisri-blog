@@ -7,11 +7,14 @@ import pagefind from "astro-pagefind";
 import sitemap from "@astrojs/sitemap";
 
 import mdx from "@astrojs/mdx";
-
+import { modifiedTime, readingTime } from "./src/utils/remarks.mjs";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.url,
   base: SITE.basePath,
+    markdown: {
+    remarkPlugins: [readingTime, modifiedTime],
+  },
   integrations: [
     tailwind(),
     mdx(),
