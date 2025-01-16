@@ -1,12 +1,22 @@
 ---
+import { getEntry } from "astro:content";
 import BaseLayout from "../layouts/Layout.astro";
+
+const entry = await getEntry("views", "error404");
+
+if (!entry) {
+  throw new Error("404 page not found");
+}
+
+const [HERO] = entry.data.blocks;
 ---
-<BaseLayout >
+
+<BaseLayout entry={entry}>
   <div class="container flex flex-col items-center justify-center py-20">
-    <h1 class="text-4xl">404 - Page Not Found</h1>
-    <p class="mt-2">Oops! The page you're looking for doesn't exist.</p>
-    <a href="/" class="btn mt-6" aria-label="Return to Homepage"
-      >Return to Homepage</a
+    <h1 class="text-4xl">{HERO.title}</h1>
+    <p class="mt-2">{HERO.description}</p>
+    <a href={HERO.link_url} class="btn mt-6" aria-label="Return to Homepage"
+      >{HERO.link_text}</a
     >
   </div>
 </BaseLayout>
