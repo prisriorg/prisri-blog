@@ -7,75 +7,19 @@ const { meta } = Astro.props;
 
 import { ClientRouter } from "astro:transitions";
 import { SITE } from "../../config";
+import WebPageSchema from "../schema/WebPageSchema.astro";
 const isArticleMeta = (props: Props["meta"]): props is ArticleMeta =>
   props.type === "article";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 const OGImage = new URL(meta.ogImage, Astro.url).href;
-
-const home = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": SITE.url + "/",
-      url: SITE.url + "/",
-      name: meta.metaTitle,
-      isPartOf: { "@id": SITE.url + "/#website" },
-      about: { "@id": SITE.url + "/#organization" },
-      datePublished: "2022-04-04T12:32:43+00:00",
-      dateModified: "2024-08-14T16:00:58+00:00",
-      description: SITE.description,
-      breadcrumb: { "@id": SITE.url + "/#breadcrumb" },
-      inLanguage: "en-GB",
-      potentialAction: [{ "@type": "ReadAction", target: [SITE.url + "/"] }],
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": SITE.url + "/#breadcrumb",
-      itemListElement: [{ "@type": "ListItem", position: 1, name: "Home" }],
-    },
-    {
-      "@type": "WebSite",
-      "@id": SITE.url+"/#website",
-      url: SITE.url+"/",
-      name: "PRISRI",
-      description: "Blog website",
-      publisher: { "@id": SITE.url+"/#organization" },
-      potentialAction: [
-        {
-          "@type": "SearchAction",
-          target: {
-            "@type": "EntryPoint",
-            urlTemplate: "https://prisri.org/search/?q={search_term_string}",
-          },
-          "query-input": {
-            "@type": "PropertyValueSpecification",
-            valueRequired: true,
-            valueName: "search_term_string",
-          },
-        },
-      ],
-      inLanguage: "en-GB",
-    },
-    {
-      "@type": "Organization",
-      "@id": SITE.url + "/#organization",
-      name: "PRISRI",
-      url: SITE.url + "/",
-      logo: {
-        "@type": "ImageObject",
-        inLanguage: "en-GB",
-        "@id": meta.ogImage,
-        url: meta.ogImage,
-        contentUrl: meta.ogImage,
-        width: 1200,
-        height: 675,
-        caption: "PRISRI",
-      },
-      image: { "@id": SITE.url+"/#/schema/logo/image/" },
-    },
-  ],
-};
+const webpage = [
+  {
+    url: canonicalURL,
+    name: meta.metaTitle,
+    description: meta.description,
+    keywords: "",
+  },
+];
 ---
 
 <head>
@@ -145,10 +89,8 @@ const home = {
           </>
         ))}
       </>
-    ) : (
-      <script type="application/ld+json" set:html={JSON.stringify(home)} />
-    )
+    ) : null
   }
-
+  <WebPageSchema main={webpage} />
   <ClientRouter />
 </head>
