@@ -10,6 +10,7 @@ import { NAVIGATION_LINKS, OTHER_LINKS, SITE } from "../../config";
 import WebPageSchema from "../schema/WebPageSchema.astro";
 import PersonSchema from "../schema/PersonSchema.astro";
 import TableOfContentSchema from "../schema/TableOfContentSchema.astro";
+import BlogPostingSchema from "../schema/BlogPostingSchema.astro";
 const isArticleMeta = (props: Props["meta"]): props is ArticleMeta =>
   props.type === "article";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
@@ -36,17 +37,16 @@ const tablecontent = [
 ];
 NAVIGATION_LINKS.map(({ href, text, target }) => {
   tablecontent.push({
-    url: SITE.url+href+`/`,
+    url: SITE.url + href + `/`,
     name: text,
   });
 });
 OTHER_LINKS.map(({ href, text, target }) => {
   tablecontent.push({
-    url: SITE.url+href+`/`,
+    url: SITE.url + href + `/`,
     name: text,
   });
 });
-        
 ---
 
 <head>
@@ -115,14 +115,17 @@ OTHER_LINKS.map(({ href, text, target }) => {
             />
           </>
         ))}
+
+        <BlogPostingSchema meta={meta} />
       </>
     ) : (
-      <WebPageSchema main={webpage} />
-      <TableOfContentSchema main={tablecontent}/>
+      <>
+        <WebPageSchema main={webpage} />
+        <TableOfContentSchema main={tablecontent} />
+      </>
     )
-    
   }
-  
-  <PersonSchema/>
+
+  <PersonSchema />
   <ClientRouter />
 </head>
