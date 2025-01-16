@@ -94,6 +94,7 @@ OTHER_LINKS.map(({ href, text, target }) => {
   <meta property="twitter:description" content={meta.description} />
   <meta property="twitter:image" content={OGImage} />
   <meta property="twitter:image:alt" content={meta.ogImageAlt} />
+
   {
     isArticleMeta(meta) ? (
       <>
@@ -127,5 +128,18 @@ OTHER_LINKS.map(({ href, text, target }) => {
   }
 
   <PersonSchema />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DNZGP1NM5S"
+  ></script>
+  <script type="module">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-DNZGP1NM5S");
+  </script>
   <ClientRouter />
 </head>
