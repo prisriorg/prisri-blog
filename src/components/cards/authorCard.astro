@@ -12,7 +12,7 @@ const { author } = Astro.props;
   <a href={`/authors/${author.id}`} class="flex flex-col gap-2">
     <div class="aspect-square w-full rounded-md overflow-hidden">
       <Image
-        class="w-full h-full object-cover filter grayscale group-hover:grayscale-0"
+        class="w-full h-full filter grayscale group-hover:grayscale-0"
         src={author.data.avatar}
         alt={author.data.name}
       />
