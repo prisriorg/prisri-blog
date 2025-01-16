@@ -15,8 +15,8 @@ export default defineConfig({
   base: SITE.basePath,
 
   markdown: {
-  remarkPlugins: [readingTime, modifiedTime],
-},
+    remarkPlugins: [readingTime, modifiedTime],
+  },
 
   integrations: [
     tailwind(),

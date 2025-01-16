@@ -1,7 +1,15 @@
 ---
+
+import type { ArticleMeta, Meta } from '../../types';
+type Props = {
+  meta: Meta | ArticleMeta;
+};
 const { meta } = Astro.props;
+
 import { ClientRouter } from 'astro:transitions';
 import { SITE } from '../../config';
+const isArticleMeta = (props: Props["meta"]): props is ArticleMeta =>
+  props.type === "article";
 const canonicalURL =new URL(Astro.url.pathname, Astro.site).href;
 const OGImage = new URL(meta.ogImage, Astro.url).href;
 ---
@@ -52,11 +60,11 @@ const OGImage = new URL(meta.ogImage, Astro.url).href;
     <meta property="twitter:image" content={OGImage} />
     <meta property="twitter:image:alt" content={meta.ogImageAlt} />
 
-    {meta.keywords ? (
+    <!-- {meta.keywords ? (
       <meta name="keywords" content={meta.keywords.join(", ")} />
-    ) : null}
+    ) : null} -->
 
-    <!-- {
+    {
       isArticleMeta(meta) ? (
         <>
           <meta
@@ -79,7 +87,7 @@ const OGImage = new URL(meta.ogImage, Astro.url).href;
           ))}
         </>
       ) : null
-    } -->
+    }
   
     <ClientRouter />
   </head>

@@ -3,22 +3,21 @@ import "../assets/css/globals.css";
 import Footer from "../components/base/Footer.astro";
 import Head from "../components/base/Head.astro";
 import Header from "../components/base/Header.astro";
-import { SITE } from "../config";
-import type { Meta } from "../types";
-const metaa:Meta = {
-  title: SITE.title,
-  metaTitle: SITE.title,
-  description: SITE.description,
-  ogImage: "/og-image.jpg",
-  ogImageAlt: SITE.title,
-  type: "website",
-}
+import { getMeta } from "../utils/getMeta";
+import type { Entry } from "../types";
+type Props = {
+  entry: Entry;
+};
+
+const { entry } = Astro.props;
+
+const meta = await getMeta(entry);
 ---
 
 <!doctype html>
 <html lang="en">
   <Head
-    meta={metaa}
+    meta={meta}
   />
   <body>
     <Header />

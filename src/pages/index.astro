@@ -4,9 +4,15 @@ import LatestNews from "../components/sections/latestNews.astro";
 import Authors from "../components/sections/authors.astro";
 
 import Layout from "../layouts/Layout.astro";
+import { getEntry } from "astro:content";
+const entry = await getEntry("views", "home");
+
+if (!entry) {
+  return Astro.redirect("/404");
+}
 ---
 
-<Layout>
+<Layout entry={entry}>
   <Headlines />
   <LatestNews />
   <Authors />
