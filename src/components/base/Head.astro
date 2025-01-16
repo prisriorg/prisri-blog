@@ -6,7 +6,7 @@ type Props = {
 const { meta } = Astro.props;
 
 import { ClientRouter } from "astro:transitions";
-import { NAVIGATION_LINKS, SITE } from "../../config";
+import { NAVIGATION_LINKS, OTHER_LINKS, SITE } from "../../config";
 import WebPageSchema from "../schema/WebPageSchema.astro";
 import PersonSchema from "../schema/PersonSchema.astro";
 import TableOfContentSchema from "../schema/TableOfContentSchema.astro";
@@ -41,6 +41,12 @@ NAVIGATION_LINKS.map(({ href, text, target }) => {
     name: text,
   });
 });
+OTHER_LINKS.map(({ href, text, target }) => {
+  tablecontent.push({
+    url: SITE.url+href+`/`,
+    name: text,
+  });
+}
         
 ---
 
