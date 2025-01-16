@@ -19,7 +19,7 @@ const home = {
       "@type": "WebPage",
       "@id": SITE.url + "/",
       url: SITE.url + "/",
-      name: "Digital Marketing Agency | Multi-Award Winning | Hallam",
+      name: meta.metaTitle,
       isPartOf: { "@id": SITE.url + "/#website" },
       about: { "@id": SITE.url + "/#organization" },
       datePublished: "2022-04-04T12:32:43+00:00",
@@ -65,10 +65,9 @@ const home = {
       logo: {
         "@type": "ImageObject",
         inLanguage: "en-GB",
-        "@id": SITE.url+"/#/schema/logo/image/",
-        url: SITE.url+"/wp-content/uploads/2020/04/Hallam-Digital-Marketing-Agency-UK.png",
-        contentUrl:
-          SITE.url+"/wp-content/uploads/2020/04/Hallam-Digital-Marketing-Agency-UK.png",
+        "@id": meta.ogImage,
+        url: meta.ogImage,
+        contentUrl: meta.ogImage,
         width: 1200,
         height: 675,
         caption: "PRISRI",
