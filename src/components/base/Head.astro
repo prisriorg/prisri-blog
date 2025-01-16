@@ -6,9 +6,10 @@ type Props = {
 const { meta } = Astro.props;
 
 import { ClientRouter } from "astro:transitions";
-import { SITE } from "../../config";
+import { NAVIGATION_LINKS, SITE } from "../../config";
 import WebPageSchema from "../schema/WebPageSchema.astro";
 import PersonSchema from "../schema/PersonSchema.astro";
+import TableOfContentSchema from "../schema/TableOfContentSchema.astro";
 const isArticleMeta = (props: Props["meta"]): props is ArticleMeta =>
   props.type === "article";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
@@ -22,6 +23,25 @@ const webpage = [
       "prisri.org, prisri, prisri blog, Priyansh Srivastava blog, PRISRI BLOG, prisri.org blog, PriSri, PriSri Blog",
   },
 ];
+
+
+const tablecontent = [
+  {
+    name: "Home",
+    url: SITE.url,
+  },
+  {
+    name: "Articles",
+    url: `${SITE.url}/articles/`,
+  },
+];
+NAVIGATION_LINKS.map(({ href, text, target }) => {
+  tablecontent.push({
+    url: SITE.url+href+`/`,
+    name: text,
+  });
+});
+        
 ---
 
 <head>
@@ -94,6 +114,7 @@ const webpage = [
     ) : (
       <WebPageSchema main={webpage} />
       <PersonSchema/>
+      <TableOfContentSchema main={tablecontent}/>
     )
   }
   <ClientRouter />
