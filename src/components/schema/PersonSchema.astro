@@ -1,0 +1,27 @@
+---
+import { SITE, SOCIAL_LINKS } from "../../config";
+const schema = {
+  "@type": "Person",
+  "@id": "https://prisri.org/authors/priyansh-srivastava/",
+  name: SITE.author,
+  image: {
+    "@type": "ImageObject",
+    inLanguage: "en-US",
+    "@id": "https://prisri.org/_astro/priyansh-srivastava.Ci1GeHlm_zC5DY.webp",
+    url: "https://prisri.org/_astro/priyansh-srivastava.Ci1GeHlm_zC5DY.webp",
+    contentUrl:
+      "https://prisri.org/_astro/priyansh-srivastava.Ci1GeHlm_zC5DY.webp",
+    caption: SITE.author,
+  },
+  description:
+    "Priyansh Srivastava is a software engineer and a tech enthusiast. He is the founder of Prisri.org and loves to write about technology, programming, and other tech-related stuff.",
+  sameAs: SOCIAL_LINKS.map((link) => link.href),
+  url: "https://prisri.org/authors/priyansh-srivastava/",
+};
+---
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>
+
