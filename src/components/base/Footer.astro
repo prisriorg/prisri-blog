@@ -5,6 +5,7 @@ import {
   OTHER_LINKS,
   SITE,
 } from "../../config";
+import Icon from "./icon.astro";
 import Hashtag from "../../assets/svgs/hashtag.astro";
 ---
 
@@ -48,7 +49,7 @@ import Hashtag from "../../assets/svgs/hashtag.astro";
                     title={text}
                     aria-label={text}
                   >
-                    {/* <Icon icon={icon} /> */}
+                    <Icon icon={icon} />
                   </a>
                 </li>
               ))
