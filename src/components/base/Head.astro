@@ -36,11 +36,11 @@ const home = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://hallam.agency/#website",
-      url: "https://hallam.agency/",
-      name: "Hallam",
-      description: "Digital Marketing Agency",
-      publisher: { "@id": "https://hallam.agency/#organization" },
+      "@id": SITE.url+"/#website",
+      url: SITE.url+"/",
+      name: "PRISRI",
+      description: "Blog website",
+      publisher: { "@id": SITE.url+"/#organization" },
       potentialAction: [
         {
           "@type": "SearchAction",
@@ -124,11 +124,6 @@ const home = {
   <meta property="twitter:description" content={meta.description} />
   <meta property="twitter:image" content={OGImage} />
   <meta property="twitter:image:alt" content={meta.ogImageAlt} />
-
-  <!-- {meta.keywords ? (
-      <meta name="keywords" content={meta.keywords.join(", ")} />
-    ) : null} -->
-
   {
     isArticleMeta(meta) ? (
       <>
