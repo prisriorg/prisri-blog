@@ -24,7 +24,6 @@ const webpage = [
   },
 ];
 
-
 const tablecontent = [
   {
     name: "Home",
@@ -46,7 +45,7 @@ OTHER_LINKS.map(({ href, text, target }) => {
     url: SITE.url+href+`/`,
     name: text,
   });
-}
+});
         
 ---
 
@@ -119,9 +118,11 @@ OTHER_LINKS.map(({ href, text, target }) => {
       </>
     ) : (
       <WebPageSchema main={webpage} />
-      <PersonSchema/>
       <TableOfContentSchema main={tablecontent}/>
     )
+    
   }
+  
+  <PersonSchema/>
   <ClientRouter />
 </head>

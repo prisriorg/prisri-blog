@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 
 export async function GET(context) {
   const articles = await getCollection("articles");
-  return context.json({
+  return new Response(JSON.stringify({
     title: SITE.title,
     description: SITE.description,
     site: context.site,
@@ -13,5 +13,5 @@ export async function GET(context) {
       description: article.data.description,
       link: `/blog/${article.id}/`,
     })),
-  });
+  }));
 }
