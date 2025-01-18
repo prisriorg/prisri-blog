@@ -9,6 +9,7 @@ const data = {
   image: meta.ogImage,
   datePublished: meta.datePublished,
   dateModified: meta.dateModified,
+  keywords: meta.keywords,
 };
 
 const schema = {
@@ -20,6 +21,7 @@ const schema = {
       },
       "headline": data.title,
       "description": data.description,
+      "keywords": data.keywords,
       "image": data.image,
       "author": {
         "@type": "Person",

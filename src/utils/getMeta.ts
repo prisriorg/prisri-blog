@@ -27,6 +27,7 @@ export const getMeta = async (
           ? collection.data.covert_alt
           : collection.data.title,
         publishedTime: collection.data.publishedTime,
+        keywords: collection.data.keywords || [],
         lastModified: remarkPluginFrontmatter.lastModified,
         authors: authors.map((author) => ({
           name: author.data.name,
@@ -41,8 +42,8 @@ export const getMeta = async (
         collection.id === "categories" && category
           ? `${capitalizeFirstLetter(category)}  - ${SITE.title}`
           : collection.id === "home"
-          ? SITE.title
-          : `${capitalizeFirstLetter(collection.data.title)} - ${SITE.title}`;
+            ? SITE.title
+            : `${capitalizeFirstLetter(collection.data.title)} - ${SITE.title}`;
 
       return {
         title: title,
