@@ -56,6 +56,10 @@ export const OTHER_LINKS: Link[] = [
     text: "Contact",
   },
   {
+    href: "/dmca",
+    text: "DMCA",
+  },
+  {
     href: "/privacy",
     text: "Privacy",
   },
@@ -64,8 +68,8 @@ export const OTHER_LINKS: Link[] = [
     text: "Terms",
   },
   {
-    href: "/cookie-policy",
-    text: "Cookie Policy",
+    href: "/disclaimer",
+    text: "Disclaimer",
   },
   {
     href: "/rss.xml",
