@@ -28,10 +28,7 @@ export const NAVIGATION_LINKS: Link[] = [
     href: "/categories/news",
     text: "News",
   },
-  {
-    href: "/categories/other",
-    text: "Other",
-  },
+  
 ];
 
 export const OTHER_LINKS: Link[] = [
