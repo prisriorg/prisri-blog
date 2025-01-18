@@ -35,6 +35,9 @@ const entry = await getEntry("views", "categories");
 if (!entry) {
   return Astro.redirect("/404");
 }
+entry.data.description= "All articles related to " + params.category + " category";
+entry.data.title = params.category;
+
 ---
 
 <ListLayout header={params.category} entry={entry}>
