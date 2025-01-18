@@ -41,13 +41,17 @@ const [HEADER] = entry.data.blocks;
     </ul>
   </section>
 
-  <PaginationOne
-    length={page.lastPage}
-    currentUrl={page.url.current}
-    currentPage={page.currentPage}
-    firstUrl={`/${firstPath}`}
-    prevUrl={page.url.prev}
-    nextUrl={page.url.next}
-    lastUrl={`/${firstPath}/${page.lastPage}`}
-  />
+  {
+    articles.length > SITE.postsPerPage ? (
+      <PaginationOne
+        length={page.lastPage}
+        currentUrl={page.url.current}
+        currentPage={page.currentPage}
+        firstUrl={`/${firstPath}`}
+        prevUrl={page.url.prev}
+        nextUrl={page.url.next}
+        lastUrl={`/${firstPath}/${page.lastPage}`}
+      />
+    ) : null
+  }
 </ListLayout>
