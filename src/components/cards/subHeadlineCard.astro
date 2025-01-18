@@ -43,7 +43,7 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
       >
         <span class="text-primary">{category.data.title}</span>
         <Divider />
-        <span>{getDateDistance(remarkPluginFrontmatter.lastModified)}</span>
+        <span>{getDateDistance(article.data.publishedTime)}</span>
       </div>
     </div>
 
