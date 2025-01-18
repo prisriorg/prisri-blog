@@ -12,11 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'] ?? '';
     $keywords = isset($_POST['keywords']) ? explode(',', $_POST['keywords']) : [];
     $category = $_POST['category'] ?? 'general';
-    $image = generateSlug($title).".jpeg" ?? '';
-
+    $imagee = $_FILES['image']['name'] ?? '';
     // Generate slug from title
     $slug = generateSlug($title);
-
+    $imageExtension = pathinfo($imagee, PATHINFO_EXTENSION);
+    $newImageName = $slug . '.' . $imageExtension;
+    $image = $newImageName ?? '';
     // Define folder and file paths
     $folderPath = __DIR__ . '/' . $slug;
     $filePath = $folderPath . '/index.mdx';
