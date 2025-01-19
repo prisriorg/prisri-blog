@@ -73,31 +73,123 @@ MDX;
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create MDX File</title>
+    <style>
+        /* General Reset */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Container */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Form Container */
+        form {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Form Elements */
+        h1 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                padding: 15px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+            }
+
+            label {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Create MDX File</h1>
     <form action="" method="POST" enctype="multipart/form-data">
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title" required><br><br>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" rows="5" cols="30" required></textarea><br><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="5" cols="30" required></textarea>
 
-        <label for="keywords">Keywords (comma-separated):</label><br>
-        <input type="text" id="keywords" name="keywords" required><br><br>
+        <label for="keywords">Keywords (comma-separated):</label>
+        <input type="text" id="keywords" name="keywords" required>
 
-        <label for="category">Category:</label><br>
-        <input type="text" id="category" name="category" required><br><br>
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required>
 
-        <label for="image">Image:</label><br>
-        <input type="file" id="image" name="image" accept="image/*"><br><br>
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
 
         <button type="submit">Create MDX File</button>
     </form>
