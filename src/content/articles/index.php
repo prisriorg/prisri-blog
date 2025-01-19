@@ -10,7 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Collect data from the form
     $title = $_POST['title'] ?? 'Untitled Post';
     $description = $_POST['description'] ?? '';
-    $keywords = isset($_POST['keywords']) ? explode(',', $_POST['keywords']) : [];
+    $keyword = isset($_POST['keywords']) ? explode(', ', $_POST['keywords']) : [];
+    $keywords = json_encode($keyword);
     $category = $_POST['category'] ?? 'general';
     $imagee = $_FILES['image']['name'] ?? '';
     // Generate slug from title
@@ -33,25 +34,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mkdir($folderPath . '/imgs', 0777, true);
         move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
     }
+    $startDate = strtotime('2024-11-11 00:00:00');
+    $endDate = time(); // Current timestamp
 
+    // Generate a random timestamp between start and end
+    $randomTimestamp = rand($startDate, $endDate);
+
+    // Convert the random timestamp to a DateTime object
+    $randomDate = new DateTime();
+    $randomDate->setTimestamp($randomTimestamp);
+    $randomDate->setTimezone(new DateTimeZone('UTC')); // Set UTC timezone
+
+    // Format the random date to the desired format
+    $formattedDate = $randomDate->format('Y-m-d\TH:i:s.v\Z');
     // Prepare the content for the MDX file
     $mdxContent = <<<MDX
 ---
 isDraft: false
-isBigHeadline: true
+isBigHeadline: false
 isSmallHeadline: true
 title: "{$title}"
 description: "{$description}"
-keywords: ["{$keywords[0]}", "{$keywords[1]}", "{$keywords[2]}"]
+keywords: {$keywords}
 cover: "./imgs/{$image}"
 category: {$category}
-publishedTime: "2024-11-19T00:00:00.000Z"
+publishedTime: "{$formattedDate}"
 authors: ["priyansh-srivastava"]
 ---
 
-# {$title}
-
-{$description}
 MDX;
 
     // Write data to the file
