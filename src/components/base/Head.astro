@@ -78,6 +78,13 @@ OTHER_LINKS.map(({ href, text, target }) => {
   <title>{meta.title}</title>
   <meta name="title" content={meta.metaTitle} />
   <meta name="description" content={meta.description} />
+  {
+    isArticleMeta(meta) ? (
+      <meta name="keywords" content={meta.metaTitle.replace(" - ",", ") +", " + meta.keywords.join(", ")} />
+    ) : (
+      <meta name="keywords" content="PriSri.org, prisri.org, prisri blog, PriSri Blog, About Priyansh Srivastava, PriSri, pri sri, new website prisri, new data pri sri, new website PRISRI BLOG, PRISRI BLOG" />
+    )
+  }
   <meta name="robots" content="index, follow" />
   <meta name="robots" content="all" />
   <meta name="language" content="en" />
@@ -138,7 +145,7 @@ OTHER_LINKS.map(({ href, text, target }) => {
   <PersonSchema />
 
   <!-- Google tag (gtag.js) -->
-  <script async  src="https://www.googletagmanager.com/gtag/js?id=G-DNZGP1NM5S"
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DNZGP1NM5S"
   ></script>
   <script type="module">
     window.dataLayer = window.dataLayer || [];
