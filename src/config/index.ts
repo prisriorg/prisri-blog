@@ -24,10 +24,6 @@ export const NAVIGATION_LINKS: Link[] = [
     href: "/categories/programming",
     text: "Programming",
   },
-  {
-    href: "/categories/news",
-    text: "News",
-  },
   
 ];
 
