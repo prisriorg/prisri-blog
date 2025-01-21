@@ -8,13 +8,19 @@ import Calendar04 from "../../../assets/svgs/calendar-04.astro";
 import Divider from "../../../components/base/divider.astro";
 import { categoriesHandler } from "../../../handlers/categories";
 import { authorsHandler } from "../../../handlers/authors";
+import { json } from "stream/consumers";
+import type { MarkdownHeading } from "astro";
+import TableOfContents from "./TableOfContents.astro";
 
 type Props = {
   article: CollectionEntry<"articles">;
   readingTime: string;
+  headings: MarkdownHeading[];
 };
 
-const { article, readingTime } = Astro.props;
+const { article, readingTime, headings } = Astro.props;
+
+
 
 const category = categoriesHandler.oneCategory(article.data.category.id);
 const authors = authorsHandler.getAuthors(article.data.authors);
@@ -28,7 +34,7 @@ const authors = authorsHandler.getAuthors(article.data.authors);
   >
     <Picture
       src={article.data.cover}
-      alt="article"
+      alt={article.data.title}
       layout="full-width"
       decoding={"async"}
       loading={"lazy"}
@@ -99,3 +105,10 @@ const authors = authorsHandler.getAuthors(article.data.authors);
     </div>
   </div>
 </section>
+
+
+
+<!-- <section class="container max-w-5xl my-8">
+  <h2 class="text-xl font-bold mb-4">Table of Contents</h2>
+  <TableOfContents headings={headings} />
+</section> -->
