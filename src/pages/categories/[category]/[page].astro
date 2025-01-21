@@ -54,7 +54,7 @@ entry.data.title = params.category;
     }
   </ul>
   {
-    articles.length > SITE.postsPerPage ? (
+    articles.length === SITE.postsPerPage ? (
       <PaginationOne
         length={page.lastPage}
         currentUrl={page.url.current}
