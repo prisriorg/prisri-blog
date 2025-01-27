@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "nna",
+            "database": "libsql://prisri-prisri.turso.io"
+        }
+    ]
+}
