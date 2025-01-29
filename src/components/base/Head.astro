@@ -65,13 +65,13 @@ OTHER_LINKS.map(({ href, text, target }) => {
   <link
     rel="alternate"
     type="application/rss+xml"
-    title={SITE.title}
+    title={SITE.title + " RSS Feed"}
     href={new URL("rss.xml", Astro.site)}
   />
   <link
     rel="alternate"
     type="application/json"
-    title={SITE.title}
+    title={SITE.title + " JSON Feed"}
     href={new URL("feed.json", Astro.site)}
   />
   <link rel="canonical" href={canonicalURL} />
@@ -80,14 +80,28 @@ OTHER_LINKS.map(({ href, text, target }) => {
   <meta name="description" content={meta.description} />
   {
     isArticleMeta(meta) ? (
-      <meta name="keywords" content={meta.metaTitle.replace(" - ",", ") +", " + meta.keywords.join(", ")} />
+      <meta
+        name="keywords"
+        content={
+          meta.metaTitle.replace(" - ", ", ") + ", " + meta.keywords.join(", ")
+        }
+      />
     ) : (
-      <meta name="keywords" content="PriSri.org, prisri.org, prisri blog, PriSri Blog, About Priyansh Srivastava, PriSri, pri sri, new website prisri, new data pri sri, new website PRISRI BLOG, PRISRI BLOG" />
+      <meta
+        name="keywords"
+        content="PriSri.org, prisri.org, prisri blog, PriSri Blog, About Priyansh Srivastava, PriSri, pri sri, new website prisri, new data pri sri, new website PRISRI BLOG, PRISRI BLOG"
+      />
     )
   }
-  <meta name="robots" content="index, follow" />
-  <meta name="robots" content="all" />
-  <meta name="language" content="en" />
+  <meta name="author" content={SITE.author} />
+  <meta name="publisher" content={SITE.author} />
+  {
+    meta.title === "404" ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow" />
+    )
+  }
   <meta property="og:type" content={meta.type} />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={meta.metaTitle} />
@@ -105,10 +119,10 @@ OTHER_LINKS.map(({ href, text, target }) => {
   <meta property="twitter:image:alt" content={meta.ogImageAlt} />
 
   <meta name="google-adsense-account" content="ca-pub-5591515314789878" />
-  <!-- <script
+  <script
     async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5591515314789878"
-    crossorigin="anonymous"></script> -->
+    crossorigin="anonymous"></script>
 
   {
     isArticleMeta(meta) ? (
@@ -147,7 +161,7 @@ OTHER_LINKS.map(({ href, text, target }) => {
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DNZGP1NM5S"
   ></script>
-  <script type="module">
+  <script type="text/javascript">
     window.dataLayer = window.dataLayer || [];
     function gtag() {
       dataLayer.push(arguments);
