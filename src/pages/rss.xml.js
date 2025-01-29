@@ -1,6 +1,10 @@
 import rss from "@astrojs/rss";
 import { SITE } from "../config";
 import { getCollection } from "astro:content";
+import sanitizeHtml from 'sanitize-html';
+import MarkdownIt from 'markdown-it';
+const parser = new MarkdownIt();
+
 
 export async function GET(context) {
   const articles = await getCollection("articles");
@@ -12,6 +16,10 @@ export async function GET(context) {
       title: article.data.title,
       pubDate: article.data.publishedTime,
       description: article.data.description,
+      content: sanitizeHtml(parser.render(post.body), {
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
+      }),
+      ...post.data,
       link: `/blog/${article.id}/`,
     })),
   });
