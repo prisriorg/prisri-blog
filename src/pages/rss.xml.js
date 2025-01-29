@@ -16,27 +16,11 @@ export async function GET(context) {
       title: article.data.title,
       pubDate: article.data.publishedTime,
       description: article.data.description,
-      content: sanitizeHtml(parser.render(post.body), {
+      content: sanitizeHtml(parser.render(article.body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
       }),
-      ...post.data,
+      ...article.data,
       link: `/blog/${article.id}/`,
     })),
   });
 }
-
-// export function GET(context) {
-//   return rss({
-//     items: blog.map((post) => ({
-//       title: post.data.title,
-//       pubDate: post.data.pubDate,
-//       description: post.data.description,
-//       // Compute RSS link from post `id`
-//       // This example assumes all posts are rendered as `/blog/[id]` routes
-//       link: `/blog/${post.id}/`,
-//       categories: post.data.categories,
-//     })),
-//     // (optional) inject custom xml
-//     customData: `<language>en-us</language>`,
-//   });
-// }
