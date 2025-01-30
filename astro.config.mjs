@@ -24,6 +24,7 @@ export default defineConfig({
     pagefind(),
     sitemap({
       changefreq: "hourly",
+      filter: (page) => page !== "https://prisri.org/newdr/" && page !== "https://prisri.org/google/",
     }),
   ],
 
