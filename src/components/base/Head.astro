@@ -96,7 +96,7 @@ OTHER_LINKS.map(({ href, text, target }) => {
   <meta name="author" content={SITE.author} />
   <meta name="publisher" content={SITE.author} />
   {
-    meta.title === "404" ? (
+    meta.title.includes("404") ? (
       <meta name="robots" content="noindex, nofollow" />
     ) : (
       <meta name="robots" content="index, follow" />
