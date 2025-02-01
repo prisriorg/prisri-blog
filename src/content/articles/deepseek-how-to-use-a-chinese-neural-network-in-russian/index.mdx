@@ -54,7 +54,7 @@ If you don't know what I'm talking about, distillation is the process of a large
 
 
 ### Reasoning models
-The beginning of reasoning models is the Reflection prompt, which became famous after the announcement of  Reflection 70B, the world's best open source model .  It is trained using Reflection-Tuning, a technique designed to allow LLMs to correct their own errors .
+The beginning of reasoning models is the Reflection prompt, which became famous after the announcement of  Reflection 70B, the world's best open source model.  It is trained using Reflection-Tuning, a technique designed to allow LLMs to correct their own errors .
 
 This is a fairly recent trend in both academic papers and Prompt Engineering techniques: we are essentially making LLMs think. More specifically, generative AI models are too fast!
 
@@ -70,3 +70,34 @@ The model  is available on Hugging Face Hub  and was trained with Llama 3.1 70B 
 
 ### DeepSeek-R1 is not the same
 These models think "out loud" before generating the final result: and this approach is very similar to humans.
+
+## Chinese AI model from DeepSeek - a revolution in the world of neural networks?
+
+Artificial intelligence is developing at a rapid pace. It seems that today not only IT giants are participating in this race, but even small companies striving to be at the top of progress. Once upon a time, such AI models as ChatGPT from OpenAI, Google Gemini, Anthropic Claude, made an indelible impression due to their ability to quickly respond to almost any user request. Of course, there were errors. Now, the boring neural networks have been replaced by the DeepSeek-R1 development of the Chinese company DeepSeek, which supposedly can reason for real, be as insightful as possible. At least, this is what its creators claim.
+
+Whether this is true or not - Associate Professor of Institute No. 8 "Computer Science and Applied Mathematics" of the Moscow Aviation Institute, PhD in Physics and Mathematics Dmitry Soshnikov shared his opinion.
+
+### Is DeepSeek-R1 as unique as they say?
+From an architectural point of view, the model is not very different from other language models, the expert believes. He noted that the main difference is the approach used to train the model.
+
+- When training DeepSeek R1, reinforcement learning was used for the first time to teach the model to reason logically. And as we know from past experience, reinforcement learning gives very good results. For example, when training a computer to play chess and Go, the corresponding versions based on Alpha Zero surpassed all previous approaches, - explained Dmitry Soshnikov.
+
+He also added that DeepSeek currently has two models: the classic DeepSeek V3, and the reasoning model DeepSeek R1 - it is largely due to it that the information noise has risen.
+
+- "R" stands for Reasoning. This model can be effectively used in areas where there is a chance to come to a result logically. Such as, for example, solving logical problems or planning. In simpler tasks – text processing, rewriting, summarization, and so on – it is much cheaper to use the V3 version without reasoning. The fact is that the reasoning process requires the model to generate a huge amount of intermediate text before obtaining the final result, – emphasized the associate professor of MAI.
+
+### Is it possible to repeat the success of DeepSeek-R1 by trying to create its analogue at home?
+
+The hype around the Chinese development turned out to be so “loud” that the question of the possibilities of creating its analogue at home and making good money on it began to appear more and more often on the Internet. According to Dmitry Soshnikov, such a plan is difficult to implement, literally impossible.
+
+— It is impossible to create something like this “from scratch” in everyday conditions – you need really huge computing resources. The estimated cost of training DeepSeek is $6 million. And this is only the cost of the last stage of training, and the entire series of experiments to create the model, of course, costs even more. But the important difference between DeepSeek and all its predecessors is that the model is open and can be freely used, including for additional training or in closed circuits of companies that are worried about data leakage. However, even for simple use of DeepSeek, a GPU cluster is required, and it will not be possible to run it at home “on your knee,” the expert concluded.
+
+Nevertheless, there is good news for startups, noted Dmitry Soshnikov, specifying that today users have access to “distilled” versions of DeepSeek, which function well on “household-level” computers. You can experiment with them.
+
+— But it is necessary to understand that “distilled” versions are not the same as the original DeepSeek (although they are often confused in the press). These are initially “small” models (LLaMa 8b, Gemma), which were trained “under the guidance” of DeepSeek. Accordingly, the quality of such models is not nearly as good as that of the original DeepSeek, although it surpasses the original basic models, explained Dmitry Soshnikov.
+
+### DeepSeek – friend, foe, or what?
+
+The wide public resonance around the development inevitably gives rise to questions about the safety of its use. Here is what an associate professor of MAI thinks about it.
+
+- Of course, providing everyone with open access to DeepSeek (by the way, it is very convenient from Russia – you can use it without a VPN) is a good way to collect data. However, let me remind you that DeepSeek is a model with open scales, and it can, if desired, be used locally, storing data within the company. Therefore, no global conspiracy theory can be built on this account. As for other possible unpleasant and unpredictable “side effects”, there are no specifics yet.
