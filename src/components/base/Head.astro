@@ -123,15 +123,22 @@ OTHER_LINKS.map(({ href, text, target }) => {
     async
     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5591515314789878"
     crossorigin="anonymous"></script> -->
-    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
-<script is:inline>
-  window.googletag = window.googletag || {cmd: []};
-  googletag.cmd.push(function() {
-    googletag.defineSlot('/22983082078/prisriorg', [MISSING_WIDTH, MISSING_HEIGHT], 'div-gpt-ad-1738670701142-0').addService(googletag.pubads());
-    googletag.pubads().enableSingleRequest();
-    googletag.enableServices();
-  });
-</script>
+  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+  ></script>
+  <script is:inline>
+    window.googletag = window.googletag || { cmd: [] };
+    googletag.cmd.push(function () {
+      googletag
+        .defineSlot(
+          "/22983082078/prisriorg",
+          [300, 250],
+          "div-gpt-ad-1738670701142-0"
+        )
+        .addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.enableServices();
+    });
+  </script>
 
   {
     isArticleMeta(meta) ? (
