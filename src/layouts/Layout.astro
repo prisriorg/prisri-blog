@@ -16,12 +16,21 @@ const meta = await getMeta(entry);
 
 <!doctype html>
 <html lang="en">
-  <Head
-    meta={meta}
-  />
+  <Head meta={meta} />
   <body>
     <Header />
+    <!-- amin -->
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-5591515314789878"
+      data-ad-slot="9922579322"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script is:inline>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     <slot />
-    <Footer/>
+    <Footer />
   </body>
 </html>
