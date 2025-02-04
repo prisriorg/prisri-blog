@@ -25,21 +25,33 @@ const { Content, remarkPluginFrontmatter, headings } = await render(article);
     readingTime={remarkPluginFrontmatter.minutesRead}
     headings={headings}
   />
-  <!-- <script
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5591515314789878"
-    crossorigin="anonymous"></script> -->
-  <!-- prisri-full -->
-  <ins
-    class="adsbygoogle"
-    style="display:block"
-    data-ad-client="ca-pub-5591515314789878"
-    data-ad-slot="3311765487"
-    data-ad-format="auto"
-    data-full-width-responsive="true"></ins>
+  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+  ></script>
   <script is:inline>
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    window.googletag = window.googletag || { cmd: [] };
+    googletag.cmd.push(function () {
+      googletag
+        .defineSlot(
+          "/22983082078/videoads",
+          [300, 250],
+          "div-gpt-ad-1738697832016-0"
+        )
+        .addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.enableServices();
+    });
   </script>
+  <!-- /22983082078/videoads -->
+  <div
+    id="div-gpt-ad-1738697832016-0"
+    style="min-width: 300px; min-height: 250px;"
+  >
+    <script is:inline>
+      googletag.cmd.push(function () {
+        googletag.display("div-gpt-ad-1738697832016-0");
+      });
+    </script>
+  </div>
   <ContentLayout>
     <Content />
   </ContentLayout>
