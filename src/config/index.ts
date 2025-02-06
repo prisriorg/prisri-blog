@@ -20,10 +20,10 @@ export const NAVIGATION_LINKS: Link[] = [
     href: "/categories/technology",
     text: "Technology",
   },
-  // {
-  //   href: "/categories/programming",
-  //   text: "Programming",
-  // },
+  {
+    href: "/categories/programming",
+    text: "Programming",
+  },
   // {
   //   href: "/categories/lifestyle",
   //   text: "Lifestyle",
