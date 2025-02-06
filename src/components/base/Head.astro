@@ -99,7 +99,7 @@ OTHER_LINKS.map(({ href, text, target }) => {
     meta.title.includes("404") ? (
       <meta name="robots" content="noindex, nofollow" />
     ) : (
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content="index, follow, max-image-preview:large" />
     )
   }
   <meta property="og:type" content={meta.type} />

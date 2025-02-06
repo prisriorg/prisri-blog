@@ -32,10 +32,10 @@ export const NAVIGATION_LINKS: Link[] = [
   //   href: "/categories/productivity",
   //   text: "Productivity",
   // },
-  // {
-  //   href: "/categories/health",
-  //   text: "Health",
-  // },
+  {
+    href: "/categories/health",
+    text: "Health",
+  },
   {
     href: "/categories/finance",
     text: "Finance",
