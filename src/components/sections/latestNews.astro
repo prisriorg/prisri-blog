@@ -15,7 +15,7 @@ const articles = articlesHandler.allArticles();
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 gap-y-6 md:grid-rows-2">
     {
       articles
-        .slice(0, 9)
+        .slice(0, 15)
         .map((article, index) => <NewsCard article={article} index={index} />)
     }
   </div>
