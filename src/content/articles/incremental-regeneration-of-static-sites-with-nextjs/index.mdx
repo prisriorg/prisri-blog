@@ -1,0 +1,157 @@
+---
+isDraft: false
+isBigHeadline: false
+isSmallHeadline: true
+title: "Incremental Regeneration of Static Sites with Next.js"
+description: "A year ago, Next.js 9.3 added support for Static Site Generation (SSG), making it the first hybrid framework."
+keywords: ["The Complete Guide,Incremental Regeneration","Incremental Regeneration of Static Sites","incremental static regeneration","incremental static generation"]
+cover: "./imgs/incremental-regeneration-of-static-sites-with-nextjs.jpeg"
+category: programming
+publishedTime: "2025-02-05T06:51:54.000Z"
+authors: ["priyansh-srivastava"]
+---
+A year ago, Next.js 9.3 added support for Static Site Generation (SSG), making it the first hybrid framework. I had been happily using Next.js for several years by then. But that release made Next.js my new standard tool. After working hard with Next.js, I joined Vercel to help companies like Tripadvisor and the Washington Post adopt Next.js and extend what they had built.
+
+In this article, I'd like to explore the next evolution of Jamstack: Incremental Static Regeneration (ISR). Here you'll find a guide to ISR, along with practical examples of how to use it, demo projects, and the tradeoffs that come with implementing ISR. The simplest way to describe ISR is that it allows you to instantly update static content whenever a change is made to a site's content. A complete rebuild of the project is not required. The hybrid approach of Next.js allows using ISR in the field of e-commerce, when preparing marketing and advertising pages, when organizing the work of blogs and in many other cases.
+
+
+## SSG problem
+
+The idea behind Jamstack is compelling: websites are pre-rendered static pages that can be sent to a CDN and then served to users around the world within seconds. Static pages are fast, static sites are resilient to crashes, and search engines index them very quickly. But there are some problems.
+
+If the Jamstack architecture is used to build a large-scale static site, it means the site's creators may have to spend hours building it. If the number of pages on the site doubles, the build time will double. Take Target.com , for example . Is it realistic to generate millions of static product pages every time the site is deployed?
+
+Even if each static page is generated in 1 ms, which is unrealistic, rebuilding the entire site will still take several hours. In the case of large web applications, using SSG for all the content of such applications is an extremely bad idea. Teams working on large projects need more flexible hybrid solutions that take into account the individual characteristics of such projects.
+
+
+## Content Management Systems
+
+Many web projects are designed to separate the content of their projects from their code. Using a content management system (CMS) without a user interface allows site editors to publish new and updated content without involving programmers. But for traditional static sites, this process can be quite slow.
+
+Imagine an online store with 100,000 products. Their prices change frequently. When an editor changes the price of headphones from $100 to $75 as part of a promotion, the CMS used on the site uses a web hook to trigger a rebuild of the entire site. It is unrealistic to wait many hours for the new price to appear on the site.
+
+Lengthy site build processes that perform unnecessary calculations can lead to additional costs. Ideally, the application should be intelligent enough to understand which product data has changed and incrementally update the corresponding pages without having to completely rebuild the site.
+
+## ISR
+
+Next.js allows you to create or update static pages after the site has been built. Incremental regeneration of static sites will allow developers and editors to use static site generation mechanisms for individual pages without having to rebuild the entire site. Using ISR allows you to preserve the strengths of SSG on the scale of projects consisting of millions of pages.
+
+Using ISR, static pages can be generated while the project is running (on demand), rather than during its build. Using analytics, A/B testing, or other metrics, a developer, seeing the pros and cons of ISR and SSG, consciously making certain compromises, gets the opportunity to flexibly configure the project build processes.
+
+Let's recall the above example of an online store with 100,000 products. If it takes 50 ms to generate a page for one product, which is quite realistic, then without using ISR, it will take almost 2 hours to build the entire site. There are no other options here. But if ISR is used, the website developer has the opportunity to choose one of the build scenarios:
+
+- Speeding up the build. During the build of the project, pages are generated for the 1000 most popular products. Requests made to the pages of other products are considered cache misses. The requested pages, static, are generated on demand. We are talking about builds lasting 1 minute.
+- Increased cache hit rate. During the project build, 10,000 pages are generated, which allows for more product pages to be cached before requests to load them are received. This option involves 8-minute builds.
+
+**Advantages of ISR**: the developer has the ability to choose the strategy for generating pages during the project build. Option A allows you to speed up the build, option B allows you to cache more finished pages
+
+
+Now let's take a closer look at our example of using ISR in an online store.
+
+Example analysis
+
+▍Loading data
+
+If you haven't used Next.js before, I'd recommend reading this to get the basics down. ISR uses the same API that's used to generate static sites — getStaticPropsrevalidate . By setting the parameter to , we 60tell Next.js that ISR should be used for the page being processed.
+
+
+
+The sequence of requests used in implementing ISR
+
+Next.js allows you to specify a revalidation time for each page. Let's set it to 60 seconds.
+The first request to a product page will result in the client being served a cached page with the original price of the product.
+Changes are made to the product data stored in the CMS.
+Requests made to the page after the first request and before 60 seconds have passed are served from the cache, and responses to them are returned to the client instantly.
+If after 60 seconds a request to load the same page is received, the cached (outdated) version is returned in response. Next.js starts a background process of page regeneration.
+After the page is successfully generated, Next.js invalidates the cache and the updated version of the page is returned in response to requests for this page. If the background page regeneration fails, the old, unchanged page remains in the cache.
+```js
+// pages/products/[id].js
+
+export async function getStaticProps({ params }) {
+  return {
+    props: {
+      product: await getProductFromDatabase(params.id)
+    },
+    revalidate: 60
+  }
+}
+```
+▍Generating paths
+
+Next.js allows you to customize which product pages should be generated during the project build and which ones should be generated on demand. Let's generate only pages for the 1000 most popular products during the project build, passing getStaticPaththe list of product IDs to the system.
+
+We need to customize the system's behavior in a situation where someone requests a product page that was not generated during the initial project build. This is done using the parameter fallback, which can take the values blocking​​and true.
+
+fallback: blocking(This is the recommended value). When a page is needed that has not yet been generated, Next.js will server-render the page on the first request. Subsequent requests to the page will be answered with a static file from the cache.
+fallback: true. When a need for a page that has not yet been generated arises, Next.js will immediately, on the first request, return a static page with a loading indicator. When the data is loaded, the page will be re-rendered, and the new data will be placed in the cache. When serving subsequent requests for the same page, the static file from the cache will be used.
+```js
+// pages/products/[id].js
+
+export async function getStaticPaths() {
+  const products = await getTop1000Products()
+  const paths = products.map((product) => ({
+    params: { id: product.id }
+  }))
+
+  return { paths, fallback: ‘blocking’ }
+}
+```
+## Compromises
+
+The end user is the main focus of Next.js. The concept of "the best way to work with static pages" is relative, its meaning depends on the industry to which the project belongs, on its audience, on the internal features of the application. Next.js allows developers to implement different strategies for working with static content without leaving the boundaries of the framework. Thanks to this, using Next.js, you can choose exactly what is best for a particular project.
+
+▍Server rendering
+
+ISR is not always what a project needs. For example, Facebook's news feed cannot display outdated data. In this case, it makes sense to resort to Server-Side Rendering (SSR) and, perhaps, to using custom headers Cache-Controlwith surrogate keys to invalidate the contents of various caches. Since Next.js is a hybrid framework, the developer has the opportunity to compromise on the use of SSR, but still remain within the framework.
+
+```js
+res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate');
+```
+SSR and edge data caching are similar to ISR (especially when using headers stale-while-revalidateto control the cache). The main difference between them is how the first request is handled. When using ISR, you can make it so that in response to the first request for a page, provided that it is pre-rendered, its static version is guaranteed to be issued. Even if the project database suddenly turns out to be unavailable, or if there are problems related to interaction with the API, the project user will still see the correct static page. But SSR allows you to customize pages based on the characteristics of incoming requests.
+
+Please note that using SSR without caching can lead to deterioration in project performance. When a user is waiting for a project page to be displayed, every millisecond matters. Using SSR without caching, in addition, can have a very negative effect on the TTFB (Time to First Byte) indicator.
+
+▍Generating static sites
+
+ISR does not always make sense to use on small sites. If the content revalidation period is longer than the time required to rebuild the entire site, then the traditional approach to generating static sites can be used instead of ISR.
+
+▍Client rendering
+
+If React is used on a site without Next.js, it means that we are talking about client-side rendering of the site (Client-Side Rendering, CSR). The application gives the visitor a page in a certain initial state, after which requests for loading additional data are executed from the JavaScript code running on the client (for example, using useEffect). Although this expands the possibilities for hosting sites (since with this approach there is no absolute need for an application server), this approach also has its drawbacks.
+
+For example, the fact that CSR projects do not have pages pre-rendered based on the original HTML markup worsens SEO capabilities. In addition, CSR pages will not work if JavaScript is disabled on the client.
+
+Features of setting the fallback parameter when using ISR
+
+If the data can be loaded very quickly, it makes sense to take a closer look at the parameter fallback: blocking. Then you won't have to worry about showing the client a page asking them to wait, and when accessing any page, the client will always get the same thing (regardless of whether the page is cached). If the data loads slowly, the use of fallback: trueallows you to immediately show the user a temporary page.
+
+## ISR is not just about caching!
+
+While I have been talking about caching throughout my discussion of ISR, I can't help but point out that it is designed to preserve generated pages between project deployments. This means that the project owner has the ability to instantly roll back to a previous version of the project and not lose previously generated pages.
+
+Each deployment can be assigned a key, which is some kind of identifier (ID). Next.js uses this ID to organize the persistent storage of generated pages. When a project is rolled back, the key can be changed to point to the previous deployment, allowing for atomic project deployments. This means that you can look at the previous immutable version of the deployed project and that it will work as expected. Here is an example of reverting to a previous version of code using ISR:
+
+New code has been added to the project and deployment ID has been assigned 123.
+It turned out that there was a typo on one of the pages - "Smshng Magazine", but it should be "Smashing Magazine".
+The page is edited in the CMS, and there is no need to redeploy the project to correct the error.
+Once the page has the desired text - "Smashing Magazine" - it is permanently placed in the storage.
+Then new code was added to the project, which contained serious errors, and the deployment received ID 354.
+It was decided to roll back to release ID 123.
+After that, the page where the typo was remained with the correct text: “Smashing Magazine”.
+
+The ability to roll back to previous site deployments and the organization of persistent storage of static pages are not the responsibility of Next.js. They are provider-dependent. Note that ISR differs from SSR using headers Cache-Control, since cached data is, by its nature, only valid for a limited time. Such caches are valid only for a specific version of the site and are cleared when rolling back to a previous version.
+
+## Examples of ISR application
+
+As already mentioned, ISR is successfully applied in a wide variety of projects. Here are some examples:
+
+Online Store . This is the Next.js Commerce starter kit, which is aimed at creating high-performance e-commerce-oriented websites.
+A static page that aggregates user responses to an issue from the GitHub issue tracker. This page is regenerated using ISR.
+A static page that displays tweets embedded in the page. That is, the display of these tweets after the page is generated does not depend on external data sources.
+
+## Now is the time to learn Next.js
+
+Solo developers and large teams choose Next.js for its hybrid approach to page rendering and for the ability to incrementally generate pages as they are needed. Using ISR gives you the power of a static site generator combined with the flexibility of server rendering. There is no need to set up a project that can use ISR. Just run the command next start.
+
+Next.js was designed to be gradually adopted into web projects. With Next.js, you can continue to use your existing code while adding as much React code as you need. By starting small and incrementally adding Next.js pages to your project, you can avoid losing some of your site’s features because you have to completely rewrite the code that implements them. In general, get acquainted with Next.js and enjoy writing code for your projects.
+
