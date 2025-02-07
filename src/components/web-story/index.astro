@@ -1,0 +1,55 @@
+---
+import { articlesHandler } from "../../handlers/articles";
+
+
+const articles = articlesHandler.allArticles();
+---
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>My Web Story</title>
+    <link
+      rel="canonical"
+      href="https://yourdomain.com/web-stories/my-story.html"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width,minimum-scale=1,initial-scale=1"
+    />
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script
+      async
+      custom-element="amp-story"
+      src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+    <style amp-custom>
+      amp-story {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <amp-story
+      standalone
+      title="My Web Story"
+      publisher="My Blog"
+      publisher-logo-src="/logo.png"
+      poster-portrait-src="/cover.jpg"
+    >
+      {
+        articles.map((block) => (
+          <amp-story-page id="page1">
+            <amp-story-grid-layer template="fill">
+              <img src={block.data.cover.src} alt="Story Image" />
+            </amp-story-grid-layer>
+            <amp-story-grid-layer template="vertical">
+              <h1>{block.data.title}</h1>
+              <p>{block.data.description}</p>
+            </amp-story-grid-layer>
+          </amp-story-page>
+        ))
+      }
+    </amp-story>
+  </body>
+</html>

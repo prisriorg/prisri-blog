@@ -24,14 +24,14 @@ export const NAVIGATION_LINKS: Link[] = [
     href: "/categories/programming",
     text: "Programming",
   },
-  // {
-  //   href: "/categories/lifestyle",
-  //   text: "Lifestyle",
-  // },
-  // {
-  //   href: "/categories/productivity",
-  //   text: "Productivity",
-  // },
+  {
+    href: "/categories/lifestyle",
+    text: "Lifestyle",
+  },
+  {
+    href: "/categories/productivity",
+    text: "Productivity",
+  },
   {
     href: "/categories/health",
     text: "Health",
